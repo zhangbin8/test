@@ -26,6 +26,7 @@ public class Test {
 		System.out.println(sf.format(new Date(date.getTime()-5000)));
 		System.out.println(3/4.0);
 		
+		
 	}
 	
 	//http://localhoust:8080/alipay/pay
@@ -36,26 +37,26 @@ public class Test {
 	
 	@RequestMapping("/pay")
 	public void main(HttpServletRequest httpRequest,HttpServletResponse httpResponse) throws AlipayApiException, IOException {
-		//ÊµÀý»¯¿Í»§¶Ë
+		//Êµï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½
 		AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", APP_ID, APP_PRIVATE_KEY, "json", CHARSET, ALIPAY_PUBLIC_KEY, "RSA2");
-		//ÊµÀý»¯¾ßÌåAPI¶ÔÓ¦µÄrequestÀà,ÀàÃû³ÆºÍ½Ó¿ÚÃû³Æ¶ÔÓ¦,µ±Ç°µ÷ÓÃ½Ó¿ÚÃû³Æ£ºalipay.open.public.template.message.industry.modify 
-		AlipayTradeWapPayRequest alipayRequest = new AlipayTradeWapPayRequest();//´´½¨API¶ÔÓ¦µÄrequest
+		//Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½APIï¿½ï¿½Ó¦ï¿½ï¿½requestï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ÆºÍ½Ó¿ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Ó¦,ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ã½Ó¿ï¿½ï¿½ï¿½ï¿½Æ£ï¿½alipay.open.public.template.message.industry.modify 
+		AlipayTradeWapPayRequest alipayRequest = new AlipayTradeWapPayRequest();//ï¿½ï¿½ï¿½ï¿½APIï¿½ï¿½Ó¦ï¿½ï¿½request
 	    alipayRequest.setReturnUrl("http://domain.com/CallBack/return_url.jsp");
-	    alipayRequest.setNotifyUrl("http://domain.com/CallBack/notify_url.jsp");//ÔÚ¹«¹²²ÎÊýÖÐÉèÖÃ»ØÌøºÍÍ¨ÖªµØÖ·
+	    alipayRequest.setNotifyUrl("http://domain.com/CallBack/notify_url.jsp");//ï¿½Ú¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Í¨Öªï¿½ï¿½Ö·
 	    alipayRequest.setBizContent("{" +
 	        "    \"out_trade_no\":\"20150320010101002\"," +
 	        "    \"total_amount\":\"88.88\"," +
 	        "    \"subject\":\"Iphone6 16G\"," +
 	        "    \"product_code\":\"QUICK_WAP_PAY\"" +
-	        "  }");//Ìî³äÒµÎñ²ÎÊý
+	        "  }");//ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½
 	    String form="";
 	    try {
-	        form = alipayClient.pageExecute(alipayRequest).getBody(); //µ÷ÓÃSDKÉú³É±íµ¥
+	        form = alipayClient.pageExecute(alipayRequest).getBody(); //ï¿½ï¿½ï¿½ï¿½SDKï¿½ï¿½ï¿½É±ï¿½
 	    } catch (AlipayApiException e) {
 	        e.printStackTrace();
 	    }
 	    httpResponse.setContentType("text/html;charset=" + CHARSET);
-	    httpResponse.getWriter().write(form);//Ö±½Ó½«ÍêÕûµÄ±íµ¥htmlÊä³öµ½Ò³Ãæ
+	    httpResponse.getWriter().write(form);//Ö±ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½htmlï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 	    httpResponse.getWriter().flush();
 	    httpResponse.getWriter().close();
 	}
